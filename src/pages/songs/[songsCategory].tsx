@@ -12,10 +12,60 @@ import {
 } from "@chakra-ui/react";
 
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Fragment } from "react";
 
-function BasicSongsPage(title, lyrics, video): SongItem {
+import {useRouter} from 'next/router'
+
+const DUMMY_SONGS = [
+  {
+    id: "1",
+    title: "Quốc Ca Việt Nam",
+    lyrics: `Này công dân ơi, Đứng lên đáp lời sông núi,
+        đồng lòng cùng đi hy sinh tiếc gì thân sống.
+        Vì tương lai quốc dân cùng xông pha khói tên,
+        làm sao cho núi sông từ nay luôn vững bền.
+        
+        Dù cho thây phơi trên gươm giáo,
+        thù nước lấy máu đào đem báo.
+        Nòi giống, lúc biến phải cần giải nguy,
+        người công dân luôn vững bền tâm trí,
+        hùng tráng quyết chiến đấu làm cho khắp nơi
+        vang tiếng người nước Nam cho đến muôn đời.
+        
+        Công dân ơi, mau hiến thân dưới cờ.
+        Công dân ơi, mau làm cho cõi bờ,
+        thoát cơn tàn phá, vẻ vang nòi giống
+        xứng danh nghìn năm dòng giống Lạc Hồng.`,
+    video: "https://www.youtube.com/embed/VSKNMUW-oF0",
+  },
+  {
+    id: "2",
+    title: "Thiếu Nhi Tân Hành Ca",
+    lyrics: `Thiếu Nhi Việt Nam đứng lên trong giai đoạn mới,
+    theo tiếng Giáo Hội và tiếng quê hương kêu mời.
+    Được trang bị dũng mạnh bằng tinh thần mới,
+    tuổi trẻ Việt Nam hăng hái xây thế hệ ngày mai. 
+
+    Cùng đi hỡi các Thiếu Nhi, cùng đi với Chúa Kitô.
+    Nguồn Sống Thánh Thể chan hòa,
+    là lý tưởng của người Thiếu Nhi hôm nay!
+
+    Thiếu Nhi Việt Nam quyết tâm trong giai đoạn mới,
+    thánh hóa môi trường rèn những khả năng phi thường.
+    Bằng nguyện cầu hy sinh và một bầu khí mới,
+    tuổi trẻ Việt Nam đem Chúa cho giới trẻ mọi nơi.`,
+    video: "https://www.youtube.com/embed/VSKNMUW-oF0",
+  },
+]
+
+function SongCategoryPage(title, lyrics, video): SongItem {
+  const router = useRouter()
+
+  const songPage = router.query.songs;
+
   return (
-    <>
+    <Fragment>
+
       <Heading>Ca Chính Thức</Heading>
       <Flex
         minH={"100vh"}
@@ -23,36 +73,34 @@ function BasicSongsPage(title, lyrics, video): SongItem {
         justify={"center"}
         bg={useColorModeValue("gray.50", "gray.800")}
       >
-        <Container>
-          <Accordion allowMultiple width="100%" maxW="lg" rounded="lg">
-            {SONG_ITEMS.map((songItem) => (
-              <AccordionItem>
-                <AccordionButton
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="space-between"
-                  p={4}
-                >
-                  <Text fontSize="md">{songItem.title}</Text>
-                  <ChevronDownIcon fontSize="24px" />
-                </AccordionButton>
-                <AccordionPanel pb={4}>
-                  <Box
-                    as="iframe"
-                    src={songItem.video}
-                    width="100%"
-                    sx={{
-                      aspectRatio: "16/9",
-                    }}
-                  />
-                  <Text color="gray.600">{songItem.lyrics}</Text>
-                </AccordionPanel>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </Container>
+        <Accordion allowMultiple width="100%" maxW="2xl" rounded="xl">
+          {SONG_ITEMS.map((songItem) => (
+            <AccordionItem>
+              <AccordionButton
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                p={4}
+              >
+                <Text fontSize="md">{songItem.title}</Text>
+                <ChevronDownIcon fontSize="24px" />
+              </AccordionButton>
+              <AccordionPanel pb={4}>
+                <Box
+                  as="iframe"
+                  src={songItem.video}
+                  width="100%"
+                  sx={{
+                    aspectRatio: "16/9",
+                  }}
+                />
+                <Text color="gray.600">{songItem.lyrics}</Text>
+              </AccordionPanel>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </Flex>
-    </>
+    </Fragment>
   );
 }
 
@@ -248,4 +296,4 @@ const SONG_ITEMS: Array<SongItem> = [
     video: "https://www.youtube.com/embed/Kxc0_mHhKO4?si=MGfHYW62pDdAub1Z",
   },
 ];
-export default BasicSongsPage;
+export default SongCategoryPage;
