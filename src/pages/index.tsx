@@ -117,17 +117,17 @@ const CARD_ITEMS: Array<CardItemsProps> = [
     },
     {
         heading: 'Ca Chính Thức',
-        description: 'Lorem ipsum dolor sit amet catetur, adipisicing elit.',
+        description: 'Basic songs',
         href: '/songs/basic',
     },
     {
         heading: 'Sinh Hoạt',
-        description: 'Lorem ipsum dolor sit amet catetur, adipisicing elit.',
+        description: 'Activity songs',
         href: '/songs/activities',
     },
     {
         heading: 'Khen Thưởng',
-        description: 'Lorem ipsum dolor sit amet catetur, adipisicing elit.',
+        description: 'Awards song',
         href: '/songs/awards',
     }
 
